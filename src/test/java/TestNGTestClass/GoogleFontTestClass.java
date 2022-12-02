@@ -70,7 +70,7 @@ public class GoogleFontTestClass {
                 logger.info(Driver.get().getCurrentUrl());
                 System.out.println("Found google-font = " + Driver.get().getCurrentUrl());
             } else {
-                System.out.println("OK");
+                System.out.println("Ok");
             }
 
         }
