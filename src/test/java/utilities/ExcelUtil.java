@@ -13,13 +13,14 @@ public class ExcelUtil {
 
     public ExcelUtil(String path, String sheetName) {
         this.path = path;
+
         try {
             // Open the Excel file
             FileInputStream ExcelFile = new FileInputStream(path);
             // Access the required test data sheet
             workBook = WorkbookFactory.create(ExcelFile);
             workSheet = workBook.getSheet(sheetName);
-            // check if sheet is null or not. null means  sheetname was wrong
+            // check if sheet is null or not. null means sheetname was wrong
             Assert.assertNotNull(String.valueOf(workSheet), "Sheet: \""+sheetName+"\" does not exist\n");
 
         } catch (Exception e) {
@@ -81,7 +82,7 @@ public class ExcelUtil {
             // get each row
             Row row = (Row) workSheet.getRow(i);
             // create map of the row using the column and value
-            // column map key, cell value --> map bvalue
+            // column map key, cell value --> map value
             Map<String, String> rowMap = new HashMap<String, String>();
             for (Cell cell : row) {
                 int columnIndex = cell.getColumnIndex();
