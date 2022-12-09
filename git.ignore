@@ -1,5 +1,5 @@
-.idea/
-target/
-out/
+.idea/*
+target/*
+out/*
 LHM_GoogleFonts.iml
 .iml
