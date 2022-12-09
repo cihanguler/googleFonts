@@ -1,6 +1,8 @@
 package TestNGTestClass;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
@@ -11,18 +13,19 @@ import utilities.BrowserUtils;
 import utilities.ConfigurationReader;
 import utilities.Driver;
 import utilities.ExcelUtil;
+import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
-public class GoogleFontTestClass {
+public class googleFontTestClass {
 
-    Logger logger = LoggerFactory.getLogger(GoogleFontTestClass.class);
+    Logger logger = LoggerFactory.getLogger(googleFontTestClass.class);
     static String browser = ConfigurationReader.get("browser");
     static String path = ConfigurationReader.get("excelPath");
     static String sheetName = ConfigurationReader.get("sheetName");
     String url = "";
     String number = "0";
 
-    public GoogleFontTestClass(String url) {
+    public googleFontTestClass(String url) {
         super();
         this.url = url;
         this.number= number;
@@ -39,7 +42,11 @@ public class GoogleFontTestClass {
         @Test(dataProvider = "urlData")
         public void findGoogleFont (String number, String url){
             logger.info("checked url: " + url);
-            Driver.get().navigate().to(url);
+            try {
+            Driver.get().navigate().to("http://"+url);
+            } catch (Exception URL) {
+                Driver.get().navigate().to("https://"+url);
+            }
             BrowserUtils.waitForPageToLoad(4);
             int webElements = 0;
             int webElements2 = 0;
@@ -54,13 +61,9 @@ public class GoogleFontTestClass {
             listOfUrl.setCellData(blank, rowNum, colNum);
 
             try {
-                //to find CSS google-fonts
                 webElements = Driver.get().findElements(By.cssSelector("[rel=stylesheet][href*=googleapis]")).size();
-                //to find static google-fonts
                 webElements2 = Driver.get().findElements(By.cssSelector("[href*=gstatic]")).size();
-                //to find static google-fonts
                 webElements3 = Driver.get().findElements(By.cssSelector("[src*=gstatic]")).size();
-                //to find javascript google-fonts
                 webElements4 = Driver.get().findElements(By.cssSelector("[src*=googleapis]")).size();
             } catch (Exception exception) {
             }
@@ -90,6 +93,12 @@ public class GoogleFontTestClass {
             Driver.closeDriver();
         }
 
+
+    public static String takeScreenshot() {
+        final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
+            String base64Path = Base64.getEncoder().encodeToString(screenshot);
+        return base64Path;
     }
 
 
+}
