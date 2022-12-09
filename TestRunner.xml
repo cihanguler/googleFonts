@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Google Font Finder Suite" thread-count="5"
+       parallel="tests" verbose="4">
+
+    <listeners>
+        <listener
+                class-name="utilities.ExtentReportListener" />
+    </listeners>
+
+    <test name="TestNG Runner">
+        <classes>
+            <class name="TestNGTestClass.googleFontTestClass" />
+        </classes>
+    </test>
+
+</suite>
