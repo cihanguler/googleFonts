@@ -41,7 +41,7 @@ public class ExtentReportListener implements ITestListener {
 
         extentReports = new ExtentReports();
         ExtentSparkReporter reporter = new ExtentSparkReporter(OUTPUT_FOLDER + FILE_NAME);
-        reporter.config().setReportName("Open Cart Automation Test Results");
+        reporter.config().setReportName("Google Font Automation Test Results");
         extentReports.attachReporter(reporter);
         extentReports.setSystemInfo("Author", "Computacenter");
         extentReports.setSystemInfo("Customer Name", "LHM");
